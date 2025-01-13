@@ -13,11 +13,12 @@ function getBooksBorrowedCount(books) {
   // Hint: You can use the [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method here. 
   // If you get stuck, feel free to take a look at this repl.it: https://replit.com/@thinkful/getBooksBorrowedCount#index.js
 
-  return books.filter((book) => {
+  return books.reduce((accumulator, book) => {
     const {borrows} = book;
-    return borrows.find((borrower) =>
-      borrower.returned === false) != undefined;  
-  }).length;
+    return accumulator + 
+      (borrows.find((borrower) => 
+        borrower.returned === false) != undefined ? 1 : 0);
+  }, 0);
 }
 
 // Tbis is a helper function that's called by other functions inside this file. You don't have to edit it.
